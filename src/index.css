@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+
+@font-face {
+  font-family: 'Glaser Stencil';
+  src: url('./assets/fonts/Glaser Stencil D Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src: url('./assets/fonts/ppneuemontreal-bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
+:root {
+  --primary-font: 'Glaser Stencil', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --secondary-font: 'PP Neue Montreal', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --body-font: 'Roboto', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: var(--body-font);
+}
+

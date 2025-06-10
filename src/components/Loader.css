@@ -1,0 +1,38 @@
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #000;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  transition: opacity 0.5s ease-out;
+}
+
+.loader.fade-out {
+  opacity: 0;
+}
+
+.loader-text {
+  font-family: var(--primary-font);
+  font-size: 4rem;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  animation: revealText 2s ease-in-out forwards;
+}
+
+@keyframes revealText {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  70% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
