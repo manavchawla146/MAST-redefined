@@ -49,7 +49,7 @@ const Navbar = () => {
         </div>
         
         <div className="menu-icon" onClick={toggleMenu}>
-          <i className={isOpen ? 'fas fa-times' : 'fas fa-bars'}></i>
+            ☰
         </div>
         
         <ul className={isOpen ? 'nav-menu active' : 'nav-menu'}>
@@ -60,7 +60,7 @@ const Navbar = () => {
               className="nav-links"
               onClick={closeMenu}
             >
-              Categories
+              Gallery
             </Link>
           </li>
           

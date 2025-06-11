@@ -79,7 +79,7 @@ function Footer() {
 
       {/* Copyright */}
       <div className="footer-copyright">
-        <p className="footer-copyright-text">© 2025 Kaastha. All Rights Reserved.</p>
+        <p className="footer-copyright-text">© 2025 Kaastha. All Rights Reserved.2025-26, Branded By Webbloom studios </p>
       </div>
     </footer>
   );
