@@ -43,7 +43,7 @@ function Footer() {
         <div className="footer-column">
           <h4 className="footer-heading">
             <CreditCard className="footer-icon" size={18} />
-            DETAILS
+            CONTACT
           </h4>
           <p className="footer-text">
             <span className="contact-label">Sales:</span> <a href="tel:7600091717" className="footer-link">76000 91717</a>

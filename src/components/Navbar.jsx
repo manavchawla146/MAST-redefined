@@ -45,11 +45,13 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <div className="navbar-logo">
-          <Link to="/" onClick={closeMenu}>MAST</Link>
+          <Link to="/" onClick={closeMenu}>
+            MAST<span className="trademark">®</span>
+          </Link>
         </div>
         
         <div className="menu-icon" onClick={toggleMenu}>
-            ☰
+          ☰
         </div>
         
         <ul className={isOpen ? 'nav-menu active' : 'nav-menu'}>
@@ -60,7 +62,7 @@ const Navbar = () => {
               className="nav-links"
               onClick={closeMenu}
             >
-              Gallery
+              COLLECTION
             </Link>
           </li>
           

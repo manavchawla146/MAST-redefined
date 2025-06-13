@@ -2,26 +2,38 @@ import React, { useState, useEffect } from 'react';
 import { motion, useMotionValue, useAnimation } from 'framer-motion';
 import './Gallery.css';
 
-// Default images (fallback if no items provided)
+// Import images
+import img1 from '../assets/images/1.jpg';
+import img2 from '../assets/images/2.jpg';
+import img3 from '../assets/images/3.jpg';
+import img4 from '../assets/images/4.jpg';
+import img5 from '../assets/images/5.jpg';
+import img6 from '../assets/images/6.jpg';
+import img7 from '../assets/images/7.jpg';
+import img8 from '../assets/images/8.jpg';
+import img9 from '../assets/images/9.jpg';
+import img10 from '../assets/images/10.jpg';
 
+// Default images (fallback if no items provided)
 const IMGS = [
-  '/src/assets/images/1.jpg',
-  '/src/assets/images/2.jpg',
-  '/src/assets/images/3.jpg',
-  '/src/assets/images/4.jpg',
-  '/src/assets/images/5.jpg',
-  '/src/assets/images/6.jpg',
-  '/src/assets/images/7.jpg',
-  '/src/assets/images/8.jpg',
-  '/src/assets/images/9.jpg',
-  '/src/assets/images/10.jpg'
-  
+  img1,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  img7,
+  img8,
+  img9,
+  img10
 ];
 
 const Gallery = ({ items, autoplay = false, pauseOnHover = false }) => {
   const [isScreenSizeSm, setIsScreenSizeSm] = useState(window.innerWidth <= 768);
   const [isDragging, setIsDragging] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [enlargedImage, setEnlargedImage] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768 || /Mobi|Android/i.test(navigator.userAgent));
 
   // Use provided items or fallback to default images
   const galleryItems = items || IMGS.map(url => ({ image: url }));
@@ -64,7 +76,7 @@ const Gallery = ({ items, autoplay = false, pauseOnHover = false }) => {
     const momentum = info.velocity.x * layoutParams.dragFactor * 0.5;
     const newRotation = rotation.get() + momentum;
     rotation.set(newRotation);
-    if (autoplay && !isPaused) startAutoplay(newRotation);
+    if (autoplay && !isPaused && !enlargedImage) startAutoplay(newRotation);
   };
 
   // Autoplay system
@@ -81,6 +93,7 @@ const Gallery = ({ items, autoplay = false, pauseOnHover = false }) => {
   useEffect(() => {
     const handleResize = () => {
       setIsScreenSizeSm(window.innerWidth <= 768);
+      setIsMobile(window.innerWidth <= 768 || /Mobi|Android/i.test(navigator.userAgent));
       setLayoutParams(getLayoutParams());
     };
     window.addEventListener('resize', handleResize);
@@ -89,12 +102,13 @@ const Gallery = ({ items, autoplay = false, pauseOnHover = false }) => {
 
   // Autoplay management
   useEffect(() => {
-    if (autoplay && !isDragging && !isPaused) startAutoplay();
+    if (autoplay && !isDragging && !isPaused && !enlargedImage) startAutoplay();
     return () => controls.stop();
-  }, [autoplay, isDragging, isPaused, controls]);
+  }, [autoplay, isDragging, isPaused, enlargedImage, controls]);
 
-  // Hover controls
+  // Hover controls (desktop only)
   const handleMouseEnter = () => {
+    if (isMobile) return; // Skip hover on mobile
     if (autoplay && pauseOnHover) {
       setIsPaused(true);
       controls.stop();
@@ -102,7 +116,41 @@ const Gallery = ({ items, autoplay = false, pauseOnHover = false }) => {
   };
 
   const handleMouseLeave = () => {
-    if (autoplay && pauseOnHover && !isDragging) {
+    if (isMobile) return; // Skip hover on mobile
+    if (autoplay && pauseOnHover && !isDragging && !enlargedImage) {
+      setIsPaused(false);
+      startAutoplay();
+    }
+  };
+
+  // Touch controls for mobile
+  const handleTouchStart = () => {
+    if (!isMobile) return;
+    if (autoplay) {
+      setIsPaused(true);
+      controls.stop();
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (!isMobile) return;
+    if (autoplay && !isDragging && !enlargedImage) {
+      setIsPaused(false);
+      startAutoplay();
+    }
+  };
+
+  // Handle image click to enlarge
+  const handleImageClick = (image) => {
+    setEnlargedImage(image);
+    setIsPaused(true);
+    controls.stop();
+  };
+
+  // Close modal
+  const handleCloseModal = () => {
+    setEnlargedImage(null);
+    if (autoplay && !isDragging) {
       setIsPaused(false);
       startAutoplay();
     }
@@ -120,6 +168,8 @@ const Gallery = ({ items, autoplay = false, pauseOnHover = false }) => {
           className="gallery-track"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
           style={{
             rotateY: rotation,
             width: layoutParams.cylinderWidth,
@@ -138,6 +188,7 @@ const Gallery = ({ items, autoplay = false, pauseOnHover = false }) => {
                 width: `${faceWidth}px`,
                 transform: `rotateY(${i * (360 / faceCount)}deg) translateZ(${radius}px)`,
               }}
+              onClick={() => handleImageClick(item.image)}
             >
               <img
                 src={item.image}
@@ -160,6 +211,16 @@ const Gallery = ({ items, autoplay = false, pauseOnHover = false }) => {
           ))}
         </motion.div>
       </div>
+      {enlargedImage && (
+        <div className="image-modal" onClick={handleCloseModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <span className="close-button" onClick={handleCloseModal}>
+              ×
+            </span>
+            <img src={enlargedImage} alt="Enlarged gallery item" />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

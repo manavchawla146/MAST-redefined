@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
 import Category from './pages/Category'
 import Catalogue from './pages/Catalogue'
@@ -12,6 +12,8 @@ function App() {
 
   const handleLoaderFinished = () => {
     setLoading(false)
+    // Ensure page starts at top when loader finishes
+    window.scrollTo(0, 0)
   }
 
   return (

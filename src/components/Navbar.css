@@ -35,6 +35,14 @@
   text-decoration: none;
 }
 
+.trademark {
+  font-size: 0.5em; /* Make the ® smaller relative to "MAST" */
+  vertical-align: super; /* Superscript the symbol */
+  position: relative;
+  top: -0.5em; /* Fine-tune vertical alignment */
+  font-family: var(--secondary-font); /* Use PP Neue Montreal, same as nav-links */
+}
+
 .nav-menu {
   display: flex;
   align-items: center;

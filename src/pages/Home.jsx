@@ -4,25 +4,47 @@ import Footer from '../components/Footer';
 import { Link, useLocation } from 'react-router-dom';
 import './Home.css';
 
+// Import images
+import img1 from '../assets/images/1.jpg';
+import img2 from '../assets/images/2.jpg';
+import img3 from '../assets/images/3.jpg';
+import img4 from '../assets/images/4.jpg';
+import img5 from '../assets/images/5.jpg';
+import img6 from '../assets/images/6.jpg';
+import img7 from '../assets/images/7.jpg';
+import img8 from '../assets/images/8.jpg';
+import img9 from '../assets/images/9.jpg';
+import img10 from '../assets/images/10.jpg';
+import mast2 from '../assets/images/mast2.jpg';
+
+// Import videos
+import video1 from '../assets/videos/3.mp4';
+import video2 from '../assets/videos/2.mp4';
+
 const Home = () => {
   const location = useLocation();
   const video1Ref = useRef(null);
   const video2Ref = useRef(null);
   const [activeVideo, setActiveVideo] = useState(null);
 
-  // Best sellers data (assuming .heic images are converted to .jpg for compatibility)
+  // Best sellers data with imported images
   const bestSellers = [
-    { image: '/src/assets/images/1.jpg' },
-    { image: '/src/assets/images/2.jpg' },
-    { image: '/src/assets/images/3.jpg' },
-    { image: '/src/assets/images/4.jpg' },
-    { image: '/src/assets/images/5.jpg' },
-    { image: '/src/assets/images/6.jpg' },
-    { image: '/src/assets/images/7.jpg' },
-    { image: '/src/assets/images/8.jpg' },
-    { image: '/src/assets/images/9.jpg' },
-    { image: '/src/assets/images/10.jpg' },
+    { image: img1 },
+    { image: img2 },
+    { image: img3 },
+    { image: img4 },
+    { image: img5 },
+    { image: img6 },
+    { image: img7 },
+    { image: img8 },
+    { image: img9 },
+    { image: img10 },
   ];
+
+  // Ensure page starts at top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     if (video2Ref.current) {
@@ -67,7 +89,7 @@ const Home = () => {
           onMouseEnter={() => handleVideoHover(video1Ref)}
         >
           <video ref={video1Ref} muted loop playsInline className="hero-video">
-            <source src="/src/assets/videos/3.mp4" type="video/mp4" />
+            <source src={video1} type="video/mp4" />
           </video>
           <h2 className="video-text">Party Wear</h2>
         </div>
@@ -76,7 +98,7 @@ const Home = () => {
           onMouseEnter={() => handleVideoHover(video2Ref)}
         >
           <video ref={video2Ref} muted loop playsInline className="hero-video">
-            <source src="/src/assets/videos/2.mp4" type="video/mp4" />
+            <source src={video2} type="video/mp4" />
           </video>
           <h2 className="video-text">Kurti set</h2>
         </div>
@@ -84,17 +106,20 @@ const Home = () => {
       <section className="best-seller-section" id="best-seller">
         <h2 className="section-title">Collection</h2>
         <Gallery items={bestSellers} autoplay={true} pauseOnHover={true} />
-       
       </section>
       <section className="about-us-section" id="about-us">
         <div className="about-us-content">
           <div className="about-us-text">
             <h2 className="section-title">About Us</h2>
-            <p className="about-description">Mast crafts stylish, high-quality clothing for women, blending timeless elegance with modern trends. Our premium fabrics and expert craftsmanship ensure every piece is durable and fashionable.</p>
-            <p className="about-mission">We're passionate about empowering you to express your unique style with confidence.</p>
+            <p className="about-description">
+              MAST<span className="trademark">®</span> crafts stylish, high-quality clothing for women, blending timeless elegance with modern trends. Our premium fabrics and expert craftsmanship ensure every piece is durable and fashionable.
+            </p>
+            <p className="about-mission">
+              We're passionate about empowering you to express your unique style with confidence.
+            </p>
           </div>
           <div className="about-us-image">
-            <img src="/src/assets/images/mast2.jpg" alt="Mast Garments Premium Collection" />
+            <img src={mast2} alt="MAST Garments Premium Collection" />
           </div>
         </div>
       </section>
