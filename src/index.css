@@ -3,16 +3,18 @@
 
 @font-face {
   font-family: 'Glaser Stencil';
-  src: url('./assets/fonts/Glaser Stencil D Regular.ttf') format('truetype');
+  src: url('/assets/fonts/Glaser Stencil D Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'PP Neue Montreal';
-  src: url('./assets/fonts/ppneuemontreal-bold.otf') format('opentype');
+  src: url('/assets/fonts/ppneuemontreal-bold.otf') format('opentype');
   font-weight: bold;
   font-style: normal;
+  font-display: swap;
 }
 
 

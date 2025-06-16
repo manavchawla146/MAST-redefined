@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "mast-suits"
+  },
+  "targets": {
+    "mast-suits": {
+      "hosting": {
+        "production": [
+          "mast-suits"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
