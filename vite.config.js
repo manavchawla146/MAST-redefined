@@ -11,10 +11,18 @@ export default defineConfig({
     rollupOptions: {
       output: {
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name.endsWith('.mp4')) {
-            return 'assets/videos/[name][extname]';
+          const info = assetInfo.name.split('.')
+          const ext = info[info.length - 1]
+          if (/\.(mp4|webm|ogg)$/.test(assetInfo.name)) {
+            return `assets/videos/[name][extname]`
           }
-          return 'assets/[name][extname]';
+          if (/\.(png|jpe?g|gif|svg|webp)$/.test(assetInfo.name)) {
+            return `assets/images/[name][extname]`
+          }
+          if (/\.(woff2?|eot|ttf|otf)$/.test(assetInfo.name)) {
+            return `assets/fonts/[name][extname]`
+          }
+          return `assets/[name][extname]`
         }
       }
     }

@@ -26,13 +26,14 @@
   text-decoration: none;
   display: flex;
   align-items: center;
-  font-family: var(--primary-font);
+  font-family: 'Glaser Stencil', var(--primary-font);
   z-index: 10000;
 }
 
 .navbar-logo a {
   color: #f7f7f7;
   text-decoration: none;
+  font-family: inherit;
 }
 
 .trademark {

@@ -17,7 +17,7 @@
 }
 
 .loader-text {
-  font-family: var(--primary-font);
+  font-family: 'Glaser Stencil', var(--primary-font);
   font-size: 4rem;
   color: white;
   position: relative;
